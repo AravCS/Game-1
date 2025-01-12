@@ -41,6 +41,7 @@ function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         text.textContent = `TIE! ${humanChoice} is the same as ${computerChoice}!`;
         score.textContent = `The score is ${humanScore} - ${computerScore}`;
+        score.style.color = "orange";
     }
 
     // scenarios where the player wins
