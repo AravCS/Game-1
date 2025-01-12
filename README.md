@@ -1,2 +1,2 @@
 # RockPaperScissors
-Rock, Paper, Scissors, game to practice JavaScript
+Odin Project - Rock, Paper, Scissors 
