@@ -22,6 +22,9 @@ function getComputerChoice() {
     }
 }
 
+/**
+ * Function to restart the game
+ */
 function resetGame() {
     humanScore = 0;
     computerScore = 0;
@@ -36,60 +39,39 @@ function resetGame() {
  * @param computerChoice the choice of the computer 
  */
 function playRound(humanChoice, computerChoice) {
-    if (humanScore === 5) {
-        score.textContent = `You beat the computer with a score of ${humanScore} - ${computerScore}`;
-        score.style.color = "green";
-        text.textContent = "Reset to play again!";
-        return;
-    }
-    else if (computerScore === 5) {
-        score.textContent = `You lost to the computer with a score of ${humanScore} - ${computerScore}`;
-        score.style.color = "red";
-        text.textContent = "Reset to play again!"
-        return;
-    }
-
     if (humanChoice === computerChoice) {
         text.textContent = `TIE! ${humanChoice} is the same as ${computerChoice}!`;
         score.textContent = `The score is ${humanScore} - ${computerScore}`;
     }
 
     // scenarios where the player wins
-    else if (humanChoice === "scissors" && computerChoice === "paper") {
-        text.textContent =`You win! ${humanChoice} beats ${computerChoice}!`;
+    else if ((humanChoice === "scissors" && computerChoice === "paper") || (humanChoice === "rock" && computerChoice === "scissors")
+        || (humanChoice === "paper" && computerChoice === "rock")) {
         humanScore++;
-        score.textContent = `The score is ${humanScore} - ${computerScore}`;
-    }
-
-    else if (humanChoice === "rock" && computerChoice === "scissors") {
+        if (humanScore === 5) {
+            score.textContent = `You beat the computer with a score of ${humanScore} - ${computerScore}`;
+            score.style.color = "green";
+            text.textContent =`You win! ${humanChoice} beats ${computerChoice}! (reset to play again)`;
+            return;
+        }
         text.textContent =`You win! ${humanChoice} beats ${computerChoice}!`;
-        humanScore++;
         score.textContent = `The score is ${humanScore} - ${computerScore}`;
-    }
-
-    else if (humanChoice === "paper" && computerChoice === "rock") {
-        text.textContent =`You win! ${humanChoice} beats ${computerChoice}!`;
-        humanScore++;
-        score.textContent = `The score is ${humanScore} - ${computerScore}`;
+        score.style.color = "green";
     }
 
     // scenarios where the computer wins
-    else if (humanChoice === "paper" && computerChoice === "scissors") {
-        text.textContent =`You lose! ${computerChoice} beats ${humanChoice}!`;
+    else if ((humanChoice === "paper" && computerChoice === "scissors") || (humanChoice === "scissors" && computerChoice === "rock")
+        || (humanChoice === "rock" && computerChoice === "paper")) {
         computerScore++;
+        if (computerScore === 5) {
+            score.textContent = `You lost to the computer with a score of ${humanScore} - ${computerScore}`;
+            score.style.color = "red";
+            text.textContent =`You win! ${humanChoice} beats ${computerChoice}! (reset to play again)`;
+            return;
+        }
+        text.textContent =`You win! ${humanChoice} beats ${computerChoice}!`;
         score.textContent = `The score is ${humanScore} - ${computerScore}`;
-    }
-
-    else if (humanChoice === "scissors" && computerChoice === "rock") {
-        text.textContent =`You lose! ${computerChoice} beats ${humanChoice}!`;
-        computerScore++;
-        score.textContent = `The score is ${humanScore} - ${computerScore}`;
-    }
-
-    else if (humanChoice === "rock" && computerChoice === "paper") {
-        text.textContent =`You lose! ${computerChoice} beats ${humanChoice}!`;
-        computerScore++;
-        score.textContent = `The score is ${humanScore} - ${computerScore}`;
+        score.style.color = "red";
     }
 
     game.appendChild(text);
@@ -115,7 +97,11 @@ game.appendChild(score);
 
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
-        if (button.classList.contains("rock")) {
+        if (button.classList.contains("reset")) {
+            resetGame();
+        }
+        else if (computerScore === 5 || humanScore === 5) {}
+        else if (button.classList.contains("rock")) {
             playRound("rock", getComputerChoice());
         }
         else if (button.classList.contains("paper")) {
@@ -123,9 +109,6 @@ buttons.forEach((button) => {
         }
         else if (button.classList.contains("scissors")) {
             playRound("scissors", getComputerChoice());
-        }
-        else if (button.classList.contains("reset")) {
-            resetGame();
         }
     });
 })
