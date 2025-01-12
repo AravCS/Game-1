@@ -1,7 +1,6 @@
 // variables to keep track of score
 let humanScore = 0;
 let computerScore = 0;
-
 /**
  * Gives a random choice, either rock, paper, or scissors, which
  * models an arbitrary choice of the computer
