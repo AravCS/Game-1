@@ -68,7 +68,7 @@ function playRound(humanChoice, computerChoice) {
             text.textContent =`You lost the last round, ${humanChoice} beats ${computerChoice}! (reset to play again)`;
             return;
         }
-        text.textContent =`You win! ${humanChoice} beats ${computerChoice}!`;
+        text.textContent =`You lose! ${humanChoice} beats ${computerChoice}!`;
         score.textContent = `The score is ${humanScore} - ${computerScore}`;
         score.style.color = "red";
     }
