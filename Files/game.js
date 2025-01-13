@@ -66,10 +66,10 @@ function playRound(humanChoice, computerChoice) {
         if (computerScore === 5) {
             score.textContent = `You lost to the computer with a score of ${humanScore} - ${computerScore}`;
             score.style.color = "red";
-            text.textContent =`You lost the last round, ${humanChoice} beats ${computerChoice}! (reset to play again)`;
+            text.textContent =`You lost the last round, ${computerChoice} beats ${humanChoice}! (reset to play again)`;
             return;
         }
-        text.textContent =`You lose! ${humanChoice} beats ${computerChoice}!`;
+        text.textContent =`You lose! ${computerChoice} beats ${humanChoice}!`;
         score.textContent = `The score is ${humanScore} - ${computerScore}`;
         score.style.color = "red";
     }
